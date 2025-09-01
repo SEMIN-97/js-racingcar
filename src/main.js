@@ -1,6 +1,9 @@
 export class Car {
+  static INITIAL_POSITION = 0
+  static MOVE_DISTANCE = 1
+
   #name = ''
-  #position = 0
+  #position = Car.INITIAL_POSITION
 
   get name() {
     return this.#name
@@ -19,6 +22,6 @@ export class Car {
   }
 
   moveForward() {
-    this.#position += 1
+    this.#position += Car.MOVE_DISTANCE
   }
 }
