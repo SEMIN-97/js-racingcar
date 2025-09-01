@@ -15,15 +15,13 @@ describe('자동차 이름 관련 테스트', () => {
   })
 
   it('이름을 입력하지 않으면 에러가 발생한다', () => {
-    const car = () => new Car()
-
-    expect(car).toThrow(INVALID_NAME_ERROR_MESSAGE)
+    expect(() => new Car()).toThrow(INVALID_NAME_ERROR_MESSAGE)
   })
 
   it('공백만 입력하면 에러가 발생한다', () => {
-    const car = () => new Car('  ')
+    name = '   '
 
-    expect(car).toThrow(INVALID_NAME_ERROR_MESSAGE)
+    expect(() => new Car(name)).toThrow(INVALID_NAME_ERROR_MESSAGE)
   })
 })
 
