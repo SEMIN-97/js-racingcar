@@ -1,4 +1,4 @@
-import { Car } from '../src/main.js'
+import { Car } from '../src/car.js'
 
 describe('자동차 이름 관련 테스트', () => {
   let name = ''
