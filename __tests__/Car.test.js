@@ -3,6 +3,7 @@ import { Car } from '../src/car.js'
 describe('자동차 이름 관련 테스트', () => {
   let name = ''
   const INVALID_NAME_ERROR_MESSAGE = '자동차 이름을 입력해 주세요.'
+  const INVALID_NAME_MAX_LENGTH_ERROR_MESSAGE = '자동차 이름은 5자 이하만 가능합니다.'
 
   beforeEach(() => {
     name = '자동차'
@@ -22,6 +23,18 @@ describe('자동차 이름 관련 테스트', () => {
     name = '   '
 
     expect(() => new Car(name)).toThrow(INVALID_NAME_ERROR_MESSAGE)
+  })
+
+  it('자동차 이름은 이름은 5자 이하만 가능하다', () => {
+    const car = new Car(name)
+
+    expect(car.name).toBe(name)
+  })
+
+  it('자동차 이름은 이름은 6자 이상 입력하면 에러가 발생한다', () => {
+    name = '자동차자동차'
+
+    expect(() => new Car(name)).toThrow(INVALID_NAME_MAX_LENGTH_ERROR_MESSAGE)
   })
 })
 
