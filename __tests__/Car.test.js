@@ -1,8 +1,8 @@
-import { Car } from '../src/main.js'
+import { Car } from '../src/car.js'
+import { CarError } from '../src/errors/carError.js'
 
 describe('자동차 이름 관련 테스트', () => {
   let name = ''
-  const INVALID_NAME_ERROR_MESSAGE = '자동차 이름을 입력해 주세요.'
 
   beforeEach(() => {
     name = '자동차'
@@ -15,15 +15,25 @@ describe('자동차 이름 관련 테스트', () => {
   })
 
   it('이름을 입력하지 않으면 에러가 발생한다', () => {
-    const car = () => new Car()
-
-    expect(car).toThrow(INVALID_NAME_ERROR_MESSAGE)
+    expect(() => new Car()).toThrow(CarError.InvalidName)
   })
 
   it('공백만 입력하면 에러가 발생한다', () => {
-    const car = () => new Car('  ')
+    name = '   '
 
-    expect(car).toThrow(INVALID_NAME_ERROR_MESSAGE)
+    expect(() => new Car(name)).toThrow(CarError.InvalidName)
+  })
+
+  it('자동차 이름은 이름은 5자 이하만 가능하다', () => {
+    const car = new Car(name)
+
+    expect(car.name).toBe(name)
+  })
+
+  it('자동차 이름은 이름은 6자 이상 입력하면 에러가 발생한다', () => {
+    name = '자동차자동차'
+
+    expect(() => new Car(name)).toThrow(CarError.NameTooLong)
   })
 })
 
@@ -43,7 +53,7 @@ describe('자동차 위치 값 관련 테스트', () => {
   it('자동차는 전진할 수 있으며 한 번에 1만큼 전진한다', () => {
     const car = new Car(name)
 
-    car.moveForward();
+    car.moveForward()
 
     expect(car.position).toBe(1)
   })
