@@ -13,4 +13,8 @@ export class Race {
   get cars() {
     return this.#cars
   }
+
+  playTurn() {
+    this.#cars.forEach(car => car.moveForward())
+  }
 }
