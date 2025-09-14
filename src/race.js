@@ -15,7 +15,10 @@ export class Race {
   }
 
   playTurn() {
-    this.#cars.forEach(car => car.moveForward())
+    this.#cars.forEach(car => {
+      const randomNumber = Math.floor(Math.random() * 10)
+      car.moveForward(randomNumber)
+    })
   }
 
   getWinnerNames() {
