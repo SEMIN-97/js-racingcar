@@ -2,18 +2,17 @@ import { readLineAsync } from './utils/readlineAsync.js'
 import { Car } from './car.js'
 
 class Game {
-  static RACING_COUNT = 5
+  #cars
 
   constructor() {}
 
   async start() {
-    const name = await readLineAsync('경주할 자동차 이름을 입력하세요. \n')
-    const car = new Car(name)
+    this.#cars = await this.getCars()
+  }
 
-    for (let i = 1; i <= Game.RACING_COUNT; i++) {
-      car.moveForward()
-      console.log(`${car.name} : ${'-'.repeat(car.position)}`)
-    }
+  async getCars() {
+    const inputNames = await readLineAsync('경주할 자동차 이름을 입력하세요. (구분 기호: 쉼표(,))\n')
+    return inputNames.split(',').map(name => new Car(name))
   }
 }
 
