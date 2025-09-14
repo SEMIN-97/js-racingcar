@@ -5,8 +5,8 @@ export class Car {
   static MOVE_DISTANCE = 1
   static NAME_MAX_LENGTH = 5
 
-  #name = ''
-  #position = Car.INITIAL_POSITION
+  #name
+  #position
 
   get name() {
     return this.#name
@@ -16,7 +16,7 @@ export class Car {
     return this.#position
   }
 
-  constructor(name) {
+  constructor(name, position) {
     if (!name?.trim().length) {
       throw new CarError.InvalidName()
     }
@@ -26,6 +26,7 @@ export class Car {
     }
 
     this.#name = name.trim()
+    this.#position = position || Car.INITIAL_POSITION
   }
 
   moveForward() {
