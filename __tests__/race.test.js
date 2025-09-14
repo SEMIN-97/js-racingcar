@@ -28,4 +28,18 @@ describe('자동차 경주 관련 테스트', () => {
       expect(position).toBe(1)
     })
   })
+
+  it('경주 종료 후 가장 멀리 간 자동차를 우승자로 판별한다 (우승자 1명)', () => {
+    cars = [new Car('자동차 1', 1), new Car('자동차 2', 2)]
+    const race = new Race(cars)
+
+    expect(race.getWinnerNames()).toEqual(['자동차 2'])
+  })
+
+  it('경주 종료 후 가장 멀리 간 자동차를 우승자로 판별한다 (우승자 2명)', () => {
+    cars = [new Car('자동차 1', 1), new Car('자동차 2', 1)]
+    const race = new Race(cars)
+
+    expect(race.getWinnerNames()).toEqual(['자동차 1', '자동차 2'])
+  })
 })
