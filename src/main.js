@@ -9,8 +9,9 @@ class Game {
   async start() {
     this.#cars = await this.getCars()
     this.#race = new Race(this.#cars)
-    
+
     this.play()
+    this.printWinner()
   }
 
   async getCars() {
@@ -28,6 +29,11 @@ class Game {
   printTurnResult() {
     this.#cars.forEach(car => console.log(`${car.name} : ${'-'.repeat(car.position)}`))
     console.log('')
+  }
+
+  printWinner() {
+    const winners = this.#race.getWinnerNames()
+    console.log(`${winners.join(', ')}가 최종 우승했습니다.`)
   }
 }
 
