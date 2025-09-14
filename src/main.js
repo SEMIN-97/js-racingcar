@@ -8,7 +8,9 @@ class Game {
 
   async start() {
     this.#cars = await this.getCars()
-    this.#race = new Race(this.#cars)
+    const round = await this.getRaceRound()
+
+    this.#race = new Race(this.#cars, round)
 
     this.play()
     this.printWinner()
@@ -17,6 +19,10 @@ class Game {
   async getCars() {
     const inputNames = await readLineAsync('경주할 자동차 이름을 입력하세요. (구분 기호: 쉼표(,))\n')
     return inputNames.split(',').map(name => new Car(name))
+  }
+
+  async getRaceRound() {
+    return await readLineAsync('시도할 회수는 몇회인가요?\n')
   }
 
   play() {

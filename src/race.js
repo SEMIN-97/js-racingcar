@@ -1,9 +1,14 @@
+import { RaceError } from './errors/raceError.js'
+
 export class Race {
-  #round = 5
+  #round
   #cars
 
-  constructor(cars) {
+  constructor(cars, round) {
     this.#cars = cars
+
+    if (!Number(round)) throw new RaceError.InvalidRound()
+    this.#round = round
   }
 
   get round() {
